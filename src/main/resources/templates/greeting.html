@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Ping UDP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+	<div id="main-content" class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<center>
+					<h1>Client to generate a ping requests over UDP</h1>
+				</center>
+			</div>
+			<div class="col-md-12">
+				<form th:action="@{/enviarPingUDP}" th:object="${pingUDP}"
+					method="post" class="form-inline">
+					<div class="form-group">
+						<label for="server">Server:</label> <input type="text"
+							th:field="*{server}" th:attr="placeholder=*{server}" id="server"
+							class="form-control"> <label for="port">Port:</label> <input
+							type="text" th:field="*{port}" th:required="required" id="port"
+							class="form-control">
+
+						<button id="connect" class="btn btn-default" type="submit">Ping</button>
+					</div>
+
+				</form>
+				<br>
+				<div class="col-md-12">
+					<div th:if="${errorConsole}" class="alert alert-danger"
+						role="alert" th:text="${errorConsole}" />
+					<div class="row">
+						<table class="table">
+							<tr th:each="respuesta: ${respuestaConsole}">
+								<td th:text="${respuesta}" />
+							</tr>
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
