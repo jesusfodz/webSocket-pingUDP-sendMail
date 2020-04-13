@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import co.edu.poligran.model.Greeting;
@@ -26,9 +27,8 @@ import co.edu.poligran.service.PingClient;
 import co.edu.poligran.service.SendMail;
 
 @Controller
+@RequestMapping("/")
 public class PingUDPController {
-	
-
 	
 	@Autowired
 	private PingClient pingClient;
