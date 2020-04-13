@@ -42,7 +42,9 @@ public class PingClientImpl implements PingClient {
 				while (sequence_number < 10) {
 					// Timestamp in ms when we send it
 					Date now = new Date();
-					double msSend = now.getTime();
+//					long msSend = now.getTime();
+					
+					long msSend = System.currentTimeMillis();
 					// Create string to send, and transfer i to a Byte Array
 					// Det timestamp der sættes på er ms siden 1/1-1970
 					String str = "PING " + sequence_number + " " + pingUDP.getMessage() + " \n";
@@ -65,7 +67,9 @@ public class PingClientImpl implements PingClient {
 						
 						// timestamp for when we received the packet
 						now = new Date();
-						double msReceived = now.getTime();
+//						long msReceived = now.getTime();
+						
+						long msReceived = System.currentTimeMillis();
 						// Print the packet and the delay
 						respuesta=printData(response, msReceived - msSend);
 					} catch (IOException e) {
@@ -86,7 +90,7 @@ public class PingClientImpl implements PingClient {
 		    * Print ping data to the standard output stream.
 		    * slightly changed from PingServer
 		    */
-		   private static String printData(DatagramPacket request, double delayTime) throws Exception
+		   private static String printData(DatagramPacket request, long delayTime) throws Exception
 		   {
 		      // Obtain references to the packet's array of bytes.
 		      byte[] buf = request.getData();
@@ -112,12 +116,12 @@ public class PingClientImpl implements PingClient {
 		         "Received from " + 
 		         request.getAddress().getHostAddress() + 
 		         ": " +
-		         new String(line).toUpperCase() + " Delay: " + delayTime );
+		         new String(line).toUpperCase() + " Delay: " + delayTime +" milliseconds" );
 		      
 		      return "Received from " + 
 		         request.getAddress().getHostAddress() + 
 		         ": " +
-		         new String(line).toUpperCase() + " Delay: " + delayTime;
+		         new String(line).toUpperCase() + " Delay: " + delayTime +" milliseconds";
 		   }
 
 }
