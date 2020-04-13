@@ -42,10 +42,10 @@ public class PingClientImpl implements PingClient {
 				while (sequence_number < 10) {
 					// Timestamp in ms when we send it
 					Date now = new Date();
-					long msSend = now.getTime();
+					double msSend = now.getTime();
 					// Create string to send, and transfer i to a Byte Array
 					// Det timestamp der sættes på er ms siden 1/1-1970
-					String str = "PING " + sequence_number + " " + msSend + " \n";
+					String str = "PING " + sequence_number + " " + pingUDP.getMessage() + " \n";
 					byte[] buf = new byte[1024];
 					buf = str.getBytes();
 					// Create a datagram packet to send as an UDP packet.
@@ -65,7 +65,7 @@ public class PingClientImpl implements PingClient {
 						
 						// timestamp for when we received the packet
 						now = new Date();
-						long msReceived = now.getTime();
+						double msReceived = now.getTime();
 						// Print the packet and the delay
 						respuesta=printData(response, msReceived - msSend);
 					} catch (IOException e) {
@@ -86,7 +86,7 @@ public class PingClientImpl implements PingClient {
 		    * Print ping data to the standard output stream.
 		    * slightly changed from PingServer
 		    */
-		   private static String printData(DatagramPacket request, long delayTime) throws Exception
+		   private static String printData(DatagramPacket request, double delayTime) throws Exception
 		   {
 		      // Obtain references to the packet's array of bytes.
 		      byte[] buf = request.getData();
@@ -112,12 +112,12 @@ public class PingClientImpl implements PingClient {
 		         "Received from " + 
 		         request.getAddress().getHostAddress() + 
 		         ": " +
-		         new String(line) + " Delay: " + delayTime );
+		         new String(line).toUpperCase() + " Delay: " + delayTime );
 		      
 		      return "Received from " + 
 		         request.getAddress().getHostAddress() + 
 		         ": " +
-		         new String(line) + " Delay: " + delayTime;
+		         new String(line).toUpperCase() + " Delay: " + delayTime;
 		   }
 
 }

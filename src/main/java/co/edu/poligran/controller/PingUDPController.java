@@ -27,7 +27,6 @@ import co.edu.poligran.service.PingClient;
 import co.edu.poligran.service.SendMail;
 
 @Controller
-@RequestMapping("/")
 public class PingUDPController {
 	
 	@Autowired

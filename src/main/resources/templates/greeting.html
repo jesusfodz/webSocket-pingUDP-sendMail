@@ -22,7 +22,9 @@
 							th:field="*{server}" th:attr="placeholder=*{server}" id="server"
 							class="form-control"> <label for="port">Port:</label> <input
 							type="text" th:field="*{port}" th:required="required" id="port"
-							class="form-control">
+							class="form-control"> <label for="message">Message:</label>
+						<input type="text" th:field="*{message}" th:required="required"
+							id="message" class="form-control">
 
 						<button id="connect" class="btn btn-default" type="submit">Ping</button>
 					</div>
@@ -41,6 +43,12 @@
 
 					</div>
 				</div>
+			</div>
+		</div>
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				Chat <a href="/" target="_black">here</a>
+
 			</div>
 		</div>
 	</div>
