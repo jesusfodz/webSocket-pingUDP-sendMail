@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Send Mail</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/main.css" rel="stylesheet">
+</head>
+<body>
+	<div id="main-content" class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<center>
+					<h1>Client to send mail</h1>
+				</center>
+			</div>
+			<div class="col-md-12">
+				<form th:action="@{/enviarMail}" th:object="${mail}" method="post">
+					<div class="form-group">
+						<label for="to">To:</label> <input type="email"
+							th:required="required" th:field="*{to}" id="to"
+							class="form-control"> <label for="subject">Subject:</label>
+						<input type="text" th:field="*{subject}" th:required="required"
+							id="subject" class="form-control"> <label for="body">Messaje:</label>
+						<textarea rows="3"  th:required="required" class="form-control"
+							th:field="*{body}" id="body"></textarea>
+
+						<button id="connect" class="btn btn-default" type="submit">Send</button>
+					</div>
+
+				</form>
+			</div>
+
+			<br>
+			<div class="col-md-12">
+				<div th:if="${errorConsole}" class="alert alert-danger" role="alert"
+					th:text="${errorConsole}" />
+
+				<div th:if="${envioOK}" class="alert alert-success" role="alert">Email sent</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

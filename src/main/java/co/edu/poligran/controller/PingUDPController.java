@@ -19,15 +19,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import co.edu.poligran.model.Greeting;
+import co.edu.poligran.model.Mail;
 import co.edu.poligran.model.Message;
 import co.edu.poligran.model.PingUDP;
 import co.edu.poligran.service.PingClient;
+import co.edu.poligran.service.SendMail;
 
 @Controller
 public class PingUDPController {
 	
+
+	
 	@Autowired
 	private PingClient pingClient;
+	
+	@Autowired
+	private SendMail sendMail;
 	
 	@MessageMapping("/hello")
 	@SendTo("/topic/greetings")
@@ -53,7 +60,7 @@ public class PingUDPController {
 	}
 	
 	@PostMapping("/enviarPingUDP")
-	public String guardar(@ModelAttribute PingUDP pingUDP, Model model) {
+	public String enviarPingUDP(@ModelAttribute PingUDP pingUDP, Model model) {
 		String error=null;
 		List<String> respuestaConsole=new ArrayList<String>();
 		System.out.println(pingUDP.getServer() + " : " + pingUDP.getPort());
@@ -67,6 +74,29 @@ public class PingUDPController {
 		model.addAttribute("respuestaConsole", respuestaConsole);
 		model.addAttribute("errorConsole", error);
 		return "greeting";
+	}
+	
+	@GetMapping("/mail")
+	public ModelAndView irMail() {
+		boolean envioOK=false;
+			return new ModelAndView("send_mail", "mail", new Mail());
+	}
+	
+	@PostMapping("/enviarMail")
+	public String enviarMail(@ModelAttribute Mail mail, Model model) {
+		String error=null;
+		boolean envioOK=false;
+		try {
+		sendMail.sendMail(mail.getTo(),mail.getSubject(),mail.getBody());
+		envioOK=true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			error=e.getMessage();
+		}
+
+		model.addAttribute("errorConsole", error);
+		model.addAttribute("envioOK", envioOK);
+		return "send_mail";
 	}
 
 }

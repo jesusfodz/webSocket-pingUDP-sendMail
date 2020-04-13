@@ -60,6 +60,19 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
+
+		<!-- para mail -->
+		<dependency>
+			<groupId>mail.jar</groupId>
+			<artifactId>mail.jar</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- para mail -->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
