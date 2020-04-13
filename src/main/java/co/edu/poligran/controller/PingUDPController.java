@@ -28,13 +28,13 @@ import co.edu.poligran.service.SendMail;
 
 @Controller
 public class PingUDPController {
-	
+
 	@Autowired
 	private PingClient pingClient;
-	
+
 	@Autowired
 	private SendMail sendMail;
-	
+
 	@MessageMapping("/hello")
 	@SendTo("/topic/greetings")
 	public Greeting greeting(Message message) throws Exception {
@@ -42,8 +42,13 @@ public class PingUDPController {
 		String time = new SimpleDateFormat("HH:mm").format(new Date());
 
 		return new Greeting(message.getFrom() + ": " + message.getText() + " (" + time + ")");
-	}	
-	
+	}
+
+	@RequestMapping("/")
+	public String home() {
+		return "index";
+	}
+
 	@GetMapping("/greeting")
 	public ModelAndView irPingUDP() {
 		InetAddress ipServer = null;
@@ -54,43 +59,43 @@ public class PingUDPController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+
 		return new ModelAndView("greeting", "pingUDP", new PingUDP(ipServer.getHostName()));
 	}
-	
+
 	@PostMapping("/enviarPingUDP")
 	public String enviarPingUDP(@ModelAttribute PingUDP pingUDP, Model model) {
-		String error=null;
-		List<String> respuestaConsole=new ArrayList<String>();
+		String error = null;
+		List<String> respuestaConsole = new ArrayList<String>();
 		System.out.println(pingUDP.getServer() + " : " + pingUDP.getPort());
 		try {
-		//	pingClient = new PingClientImpl();
+			// pingClient = new PingClientImpl();
 			respuestaConsole = pingClient.response(pingUDP);
 		} catch (Exception e) {
 			e.printStackTrace();
-			error=e.getMessage();
+			error = e.getMessage();
 		}
 		model.addAttribute("respuestaConsole", respuestaConsole);
 		model.addAttribute("errorConsole", error);
 		return "greeting";
 	}
-	
+
 	@GetMapping("/mail")
 	public ModelAndView irMail() {
-		boolean envioOK=false;
-			return new ModelAndView("send_mail", "mail", new Mail());
+		boolean envioOK = false;
+		return new ModelAndView("send_mail", "mail", new Mail());
 	}
-	
+
 	@PostMapping("/enviarMail")
 	public String enviarMail(@ModelAttribute Mail mail, Model model) {
-		String error=null;
-		boolean envioOK=false;
+		String error = null;
+		boolean envioOK = false;
 		try {
-		sendMail.sendMail(mail.getTo(),mail.getSubject(),mail.getBody());
-		envioOK=true;
+			sendMail.sendMail(mail.getTo(), mail.getSubject(), mail.getBody());
+			envioOK = true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			error=e.getMessage();
+			error = e.getMessage();
 		}
 
 		model.addAttribute("errorConsole", error);
