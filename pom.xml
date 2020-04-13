@@ -64,11 +64,11 @@
 		</dependency>
 
 		<!-- para mail -->
-		<dependency>
-			<groupId>mail.jar</groupId>
-			<artifactId>mail.jar</artifactId>
-			<version>1.4</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>mail.jar</groupId> -->
+<!-- 			<artifactId>mail.jar</artifactId> -->
+<!-- 			<version>1.4</version> -->
+<!-- 		</dependency> -->
 		<!-- para mail -->
 
 		<dependency>
