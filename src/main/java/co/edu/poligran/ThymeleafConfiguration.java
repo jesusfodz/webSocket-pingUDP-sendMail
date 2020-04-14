@@ -19,7 +19,8 @@ public class ThymeleafConfiguration {
 	@PostConstruct
 	public void setTemplateREsolver() {
 		FileTemplateResolver templateResolver = new FileTemplateResolver();
-		templateResolver.setPrefix("./src/main/resources/templates/");
+//		templateResolver.setPrefix("./src/main/resources/templates/");
+		templateResolver.setPrefix("/src/main/resources/templates/");
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML5");
 		templateResolver.setCacheable(false);
