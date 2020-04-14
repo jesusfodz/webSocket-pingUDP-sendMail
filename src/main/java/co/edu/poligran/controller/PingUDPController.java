@@ -44,7 +44,7 @@ public class PingUDPController {
 		return new Greeting(message.getFrom() + ": " + message.getText() + " (" + time + ")");
 	}
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String home() {
 		return "index";
 	}
