@@ -20,7 +20,11 @@ public class ThymeleafConfiguration {
 	public void setTemplateREsolver() {
 		FileTemplateResolver templateResolver = new FileTemplateResolver();
 //		templateResolver.setPrefix("./src/main/resources/templates/");
+<<<<<<< HEAD
 		templateResolver.setPrefix("/src/main/resources/templates/");
+=======
+		templateResolver.setPrefix("templates/");
+>>>>>>> f6f902a20f670e2bd095b3e3d746656fd721867c
 		templateResolver.setSuffix(".html");
 		templateResolver.setTemplateMode("HTML5");
 		templateResolver.setCacheable(false);
