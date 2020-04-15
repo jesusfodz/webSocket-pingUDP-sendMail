@@ -47,7 +47,7 @@ public class PingUDPController {
 	@GetMapping("/")
 	public String home(Model model) {
 		model.addAttribute("pageTitle","WebSocket connection");
-		return "index";
+		return "chatMessage/chat";
 	}
 
 	@GetMapping("/greeting")
